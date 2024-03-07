@@ -6,14 +6,15 @@ import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
+import static features.tests.lojinha.produto.AdicionarProdutoTest.removerProdutoCriado;
 import static io.restassured.RestAssured.given;
-import static java.lang.Double.parseDouble;
 import static org.hamcrest.Matchers.*;
 
 public class AlterarProdutoTest {
@@ -23,7 +24,7 @@ public class AlterarProdutoTest {
     private static String componenteNome;
     private static int componenteQuantidade;
     private static Double valorProduto;
-    private static int produtoId;
+    private static Integer produtoId;
 
     @BeforeEach
     public void setUp(){
@@ -105,5 +106,9 @@ public class AlterarProdutoTest {
         .when()
             .put(BaseProdutoPath.getPath() + "/" + produtoId)
         .then();
+    }
+    @AfterEach
+    public void tearDown(){
+        removerProdutoCriado(produtoId, token);
     }
 }

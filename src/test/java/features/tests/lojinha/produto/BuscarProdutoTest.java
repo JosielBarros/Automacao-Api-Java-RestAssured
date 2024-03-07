@@ -10,6 +10,7 @@ import org.junit.jupiter.api.*;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
+import static features.tests.lojinha.produto.AdicionarProdutoTest.removerProdutoCriado;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
@@ -17,6 +18,7 @@ public class BuscarProdutoTest {
     private static String token;
     private static String nomeProduto;
     private static String corProduto;
+    private static int produtoId;
 
     @BeforeEach
     public void setUp(){
@@ -33,7 +35,7 @@ public class BuscarProdutoTest {
                 .extract()
                 .path("data.token");
 
-        given()
+        produtoId = given()
             .contentType(ContentType.JSON)
             .header("token", token)
             .body(ProdutoDataFactory.criarProduto(nomeProduto, 4200.00, "Carregador", 1, corProduto))
@@ -41,7 +43,8 @@ public class BuscarProdutoTest {
             .post(BaseProdutoPath.getPath())
         .then()
             .assertThat()
-                .statusCode(HttpStatus.SC_CREATED);
+                .statusCode(HttpStatus.SC_CREATED)
+                .extract().path("data.produtoId");
     }
     @Test
     @DisplayName("Validar busca de produto para um usuário")
@@ -88,5 +91,9 @@ public class BuscarProdutoTest {
         .when()
             .get(BaseProdutoPath.getPath())
         .then();
+    }
+    @AfterEach
+    public void tearDown(){
+        removerProdutoCriado(produtoId, token);
     }
 }

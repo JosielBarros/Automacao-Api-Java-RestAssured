@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
+import static features.tests.lojinha.produto.AdicionarProdutoTest.removerProdutoCriado;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
@@ -43,6 +44,7 @@ public class BuscarProdutoIdTest {
             .body("data.produtoNome", equalTo(nomeProduto))
             .body("data.produtoCores", hasItem(corProduto))
             .body("data.componentes[0].componenteNome", equalTo("Carregador"));
+        removerProdutoCriado(produtoId, token);
     }
     @Test
     @DisplayName("Validar tentativa de busca de produto por id invalido")

@@ -38,15 +38,16 @@ public class AdicionarProdutoTest {
     @Test
     @DisplayName("Validar cadastro de produto")
     public void validarCadastroProduto(){
-        adicionarUmProduto(3000.00).assertThat()
+        int produtoId = adicionarUmProduto(3000.00).assertThat()
             .statusCode(HttpStatus.SC_CREATED)
             .body("message", equalTo("Produto adicionado com sucesso"))
             .body("data.produtoNome", equalTo(NOME_PRODUTO))
             .body("data.componentes[0].componenteQuantidade", equalTo(1))
             .body("data.componentes[0].componenteNome", equalTo(NOME_COMPONENTE))
-            .body("data.produtoCores", hasItem(COR_PRODUTO));
+            .body("data.produtoCores", hasItem(COR_PRODUTO))
+            .extract().path("data.produtoId");
+        removerProdutoCriado(produtoId, token);
     }
-
     @Test
     @DisplayName("Validar tentativa de cadastro do produto com valor do produto menor que 0.00")
     public void validarTentativaCadastroProdutoComValorProdutoMenorQue0(){
@@ -54,7 +55,6 @@ public class AdicionarProdutoTest {
             .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .body("error", equalTo("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00"));
     }
-
     @Test
     @DisplayName("Validar tentativa de cadastro do produto com valor do produto maior que 7000.00")
     public void validarTentativaCadastroProdutoValorProdutoMaiorQue7000(){
@@ -78,5 +78,16 @@ public class AdicionarProdutoTest {
         .when()
             .post(BaseProdutoPath.getPath())
         .then();
+    }
+    public static void removerProdutoCriado(Integer produtoId, String token){
+        if (produtoId != null && token != null) {
+            given()
+                .header("token", token)
+            .when()
+                .delete(BaseProdutoPath.getPath() + "/" + produtoId)
+            .then()
+                .assertThat()
+                    .statusCode(HttpStatus.SC_NO_CONTENT);
+        }
     }
 }
