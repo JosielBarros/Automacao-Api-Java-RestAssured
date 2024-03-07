@@ -18,7 +18,6 @@ import static io.restassured.RestAssured.given;
 public class AdicionarProdutoTest {
     private static String token;
     private static final String NOME_PRODUTO = "MacBook";
-    private static double valorProduto = 3000.00;
     private static final String NOME_COMPONENTE = "Mouse";
     private static final String COR_PRODUTO = "Vermelha";
 
@@ -39,7 +38,7 @@ public class AdicionarProdutoTest {
     @Test
     @DisplayName("Validar cadastro de produto")
     public void validarCadastroProduto(){
-        adicionarUmProduto().assertThat()
+        adicionarUmProduto(3000.00).assertThat()
             .statusCode(HttpStatus.SC_CREATED)
             .body("message", equalTo("Produto adicionado com sucesso"))
             .body("data.produtoNome", equalTo(NOME_PRODUTO))
@@ -51,8 +50,7 @@ public class AdicionarProdutoTest {
     @Test
     @DisplayName("Validar tentativa de cadastro do produto com valor do produto menor que 0.00")
     public void validarTentativaCadastroProdutoComValorProdutoMenorQue0(){
-        valorProduto = 0.00;
-        adicionarUmProduto().assertThat()
+        adicionarUmProduto(0.00).assertThat()
             .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .body("error", equalTo("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00"));
     }
@@ -60,12 +58,19 @@ public class AdicionarProdutoTest {
     @Test
     @DisplayName("Validar tentativa de cadastro do produto com valor do produto maior que 7000.00")
     public void validarTentativaCadastroProdutoValorProdutoMaiorQue7000(){
-        valorProduto = 7000.01;
-        adicionarUmProduto().assertThat()
+        adicionarUmProduto(7000.01).assertThat()
             .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .body("error", equalTo("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00"));
     }
-    private ValidatableResponse adicionarUmProduto(){
+    @Test
+    @DisplayName("Validar que o valor é obrigatório ao cadastrar o produto")
+    public void validarQueOValorEObrigatorioAoCadastrarOProduto(){
+        adicionarUmProduto(null).assertThat()
+            .statusCode(HttpStatus.SC_BAD_REQUEST)
+            .body("data", empty())
+            .body("error", equalTo("produtoNome, produtoValor e produtoCores são campos obrigatórios"));
+    }
+    private ValidatableResponse adicionarUmProduto(Double valorProduto){
         return given()
             .contentType(ContentType.JSON)
             .header("token", token)
