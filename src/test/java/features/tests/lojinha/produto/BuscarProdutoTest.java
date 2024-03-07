@@ -29,7 +29,7 @@ public class BuscarProdutoTest {
         .when()
             .post(BaseLoginPath.getPath())
         .then()
-            .statusCode(200)
+            .statusCode(HttpStatus.SC_OK)
                 .extract()
                 .path("data.token");
 
@@ -40,9 +40,9 @@ public class BuscarProdutoTest {
         .when()
             .post(BaseProdutoPath.getPath())
         .then()
-            .statusCode(201);
+            .assertThat()
+                .statusCode(HttpStatus.SC_CREATED);
     }
-
     @Test
     @DisplayName("Validar busca de produto para um usuário")
     public void validarBuscaDeProdutoParaUmUsuario(){
@@ -54,7 +54,6 @@ public class BuscarProdutoTest {
             .body("data[0].produtoNome", notNullValue())
             .body("data[0].produtoValor", greaterThan(0));
     }
-
     @Test
     @DisplayName("Validar busca de produto por nome")
     public void validarBuscaDeProdutoPorNome() {
@@ -64,7 +63,6 @@ public class BuscarProdutoTest {
             .body("data.size()", greaterThan(0))
             .body("data.produtoNome", everyItem(equalTo(nomeProduto)));
     }
-
     @Test
     @DisplayName("Validar busca de produtos por cor")
     public void validarBuscaDeProdutoPorCor(){
@@ -74,7 +72,6 @@ public class BuscarProdutoTest {
             .body("data.size()", greaterThan(0))
             .body("data.produtoCores", everyItem(hasItem(corProduto)));
     }
-
     @Test
     @DisplayName("Validar tentativa de busca por produto não cadastrado")
     public void validarTentativaDeBuscaPorProdutoNaoCadastrado(){
