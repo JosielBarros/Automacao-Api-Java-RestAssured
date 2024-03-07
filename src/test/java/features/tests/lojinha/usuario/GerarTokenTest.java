@@ -4,8 +4,8 @@ import features.clients.lojinha.BaseConfig;
 import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
@@ -22,13 +22,13 @@ public class GerarTokenTest {
     @DisplayName("Validar tentativa de gerar token com usuario invalido")
     public void validarTentativaGerarTokenUsuarioInvalido(){
         gerartoken("usuario_invalido", "senha_invalida").assertThat()
-            .statusCode(401);
+            .statusCode(HttpStatus.SC_UNAUTHORIZED);
     }
     @Test
     @DisplayName("Validar geração de token")
     public void validarGeracaoToken(){
         gerartoken("jhon", "123").assertThat()
-            .statusCode(200)
+            .statusCode(HttpStatus.SC_OK)
             .body("message", equalTo("Sucesso ao realizar o login"));
     }
     private ValidatableResponse gerartoken(String login, String senha){

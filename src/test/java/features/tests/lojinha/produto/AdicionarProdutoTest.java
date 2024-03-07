@@ -5,6 +5,7 @@ import features.clients.lojinha.produto.BaseProdutoPath;
 import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,10 +17,10 @@ import static io.restassured.RestAssured.given;
 
 public class AdicionarProdutoTest {
     private static String token;
-    private final String NOME_PRODUTO = "MacBook";
-    private double valorProduto = 3000.00;
-    private final String NOME_COMPONENTE = "Mouse";
-    private final String COR_PRODUTO = "Vermelha";
+    private static final String NOME_PRODUTO = "MacBook";
+    private static double valorProduto = 3000.00;
+    private static final String NOME_COMPONENTE = "Mouse";
+    private static final String COR_PRODUTO = "Vermelha";
 
     @BeforeAll
     public static void setUp(){
@@ -30,7 +31,7 @@ public class AdicionarProdutoTest {
         .when()
             .post(BaseLoginPath.getPath())
         .then()
-            .statusCode(200)
+            .statusCode(HttpStatus.SC_OK)
             .extract()
                 .path("data.token");
     }
@@ -39,7 +40,7 @@ public class AdicionarProdutoTest {
     @DisplayName("Validar cadastro de produto")
     public void validarCadastroProduto(){
         adicionarUmProduto().assertThat()
-            .statusCode(201)
+            .statusCode(HttpStatus.SC_CREATED)
             .body("message", equalTo("Produto adicionado com sucesso"))
             .body("data.produtoNome", equalTo(NOME_PRODUTO))
             .body("data.componentes[0].componenteQuantidade", equalTo(1))
@@ -52,7 +53,7 @@ public class AdicionarProdutoTest {
     public void validarTentativaCadastroProdutoComValorProdutoMenorQue0(){
         valorProduto = 0.00;
         adicionarUmProduto().assertThat()
-            .statusCode(422)
+            .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .body("error", equalTo("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00"));
     }
 
@@ -61,7 +62,7 @@ public class AdicionarProdutoTest {
     public void validarTentativaCadastroProdutoValorProdutoMaiorQue7000(){
         valorProduto = 7000.01;
         adicionarUmProduto().assertThat()
-            .statusCode(422)
+            .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .body("error", equalTo("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00"));
     }
     private ValidatableResponse adicionarUmProduto(){
