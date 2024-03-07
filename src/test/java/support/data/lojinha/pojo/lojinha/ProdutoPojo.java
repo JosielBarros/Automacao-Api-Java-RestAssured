@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ProdutoPojo {
     private String produtoNome;
-    private double produtoValor;
+    private Double produtoValor;
     private List<String> produtoCores;
     private String produtoUrlMock;
     private List<ComponentesPojo> componentes;
@@ -13,7 +13,7 @@ public class ProdutoPojo {
         this.produtoNome = produtoNome;
     }
 
-    public void setProdutoValor(double produtoValor) {
+    public void setProdutoValor(Double produtoValor) {
         this.produtoValor = produtoValor;
     }
 
@@ -33,7 +33,7 @@ public class ProdutoPojo {
         return produtoNome;
     }
 
-    public double getProdutoValor() {
+    public Double getProdutoValor() {
         return produtoValor;
     }
 

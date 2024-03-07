@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDataFactory {
-    public static ProdutoPojo criarProduto(String nome, double valor, String componenteNome, int componenteQuantidade, String cor){
+    public static ProdutoPojo criarProduto(String nome, Double valor, String componenteNome, int componenteQuantidade, String cor){
         ProdutoPojo produto = new ProdutoPojo();
         produto.setProdutoNome(nome);
         produto.setProdutoValor(valor);
