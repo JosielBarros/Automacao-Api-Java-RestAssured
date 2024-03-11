@@ -6,9 +6,9 @@ import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 
 public class RemoverProdutoTest {
     private static String token;
-    @BeforeEach
+    @Before
     public void setUp(){
         BaseConfig.configApis();
         token = given()

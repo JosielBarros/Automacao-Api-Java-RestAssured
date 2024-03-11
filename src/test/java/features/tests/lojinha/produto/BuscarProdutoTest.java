@@ -6,7 +6,10 @@ import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
@@ -20,7 +23,7 @@ public class BuscarProdutoTest {
     private static String corProduto;
     private static int produtoId;
 
-    @BeforeEach
+    @Before
     public void setUp(){
         BaseConfig.configApis();
         corProduto = "Vermelha";
@@ -92,7 +95,7 @@ public class BuscarProdutoTest {
             .get(BaseProdutoPath.getPath())
         .then();
     }
-    @AfterEach
+    @After
     public void tearDown(){
         removerProdutoCriado(produtoId, token);
     }

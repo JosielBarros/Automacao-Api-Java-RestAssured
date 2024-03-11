@@ -6,10 +6,10 @@ import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
@@ -26,7 +26,7 @@ public class AlterarProdutoTest {
     private static Double valorProduto;
     private static Integer produtoId;
 
-    @BeforeEach
+    @Before
     public void setUp(){
         BaseConfig.configApis();
         corProduto = "Vermelha";
@@ -107,7 +107,7 @@ public class AlterarProdutoTest {
             .put(BaseProdutoPath.getPath() + "/" + produtoId)
         .then();
     }
-    @AfterEach
+    @After
     public void tearDown(){
         removerProdutoCriado(produtoId, token);
     }

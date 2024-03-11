@@ -3,12 +3,12 @@ package features.tests.lojinha.produto;
 import features.clients.lojinha.BaseConfig;
 import features.clients.lojinha.produto.BaseProdutoPath;
 import features.clients.lojinha.usuario.BaseLoginPath;
+import org.junit.Before;
+import org.junit.Test;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
@@ -21,8 +21,8 @@ public class AdicionarProdutoTest {
     private static final String NOME_COMPONENTE = "Mouse";
     private static final String COR_PRODUTO = "Vermelha";
 
-    @BeforeAll
-    public static void setUp(){
+    @Before
+    public void setUp(){
         BaseConfig.configApis();
         token = given()
             .contentType(ContentType.JSON)

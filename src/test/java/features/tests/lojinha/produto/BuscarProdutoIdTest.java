@@ -6,9 +6,10 @@ import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 
@@ -21,7 +22,7 @@ public class BuscarProdutoIdTest {
     private static String nomeProduto;
     private static String corProduto;
     private static int produtoId;
-    @BeforeEach
+    @Before
     public void setUp(){
         BaseConfig.configApis();
         token = given()
