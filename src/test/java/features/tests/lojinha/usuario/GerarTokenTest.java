@@ -12,6 +12,7 @@ import support.data.lojinha.data_factory.UsuarioDataFactory;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("Gerar token do usuário")
 public class GerarTokenTest {
 
     @BeforeAll

@@ -14,6 +14,7 @@ import support.data.lojinha.data_factory.UsuarioDataFactory;
 
 import static io.restassured.RestAssured.given;
 
+@DisplayName("Remover um produto do usuário")
 public class RemoverProdutoTest {
     private static String token;
     @Before

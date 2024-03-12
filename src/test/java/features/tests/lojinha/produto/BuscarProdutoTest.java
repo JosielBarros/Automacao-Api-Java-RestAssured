@@ -17,6 +17,7 @@ import static features.tests.lojinha.produto.AdicionarProdutoTest.removerProduto
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("Buscar por produtos do usuário")
 public class BuscarProdutoTest {
     private static String token;
     private static String nomeProduto;

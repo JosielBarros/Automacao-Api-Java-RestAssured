@@ -15,6 +15,7 @@ import support.data.lojinha.data_factory.UsuarioDataFactory;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.given;
 
+@DisplayName("Adicionar produto ao usuário")
 public class AdicionarProdutoTest {
     private static String token;
     private static final String NOME_PRODUTO = "MacBook";

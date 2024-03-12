@@ -9,14 +9,13 @@ import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
-
 import static features.tests.lojinha.produto.AdicionarProdutoTest.removerProdutoCriado;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("Buscar por produto do usuário")
 public class BuscarProdutoIdTest {
     private static String token;
     private static String nomeProduto;
