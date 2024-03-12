@@ -6,11 +6,10 @@ import features.clients.lojinha.usuario.BaseUsuarioPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
-
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -19,7 +18,7 @@ public class AdicionarUsuarioTest {
     Faker faker = new Faker();
     private static final String NOME_USUARIO = "Jhon";
     // O ideal seria exluir o usuário ao final do teste e cadastrar novamente. Mas a API não tem o endpoint de exclusão.
-    @BeforeAll
+    @BeforeClass
     public static void setUp(){
         BaseConfig.configApis();
     }

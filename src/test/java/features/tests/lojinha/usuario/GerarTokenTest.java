@@ -5,9 +5,9 @@ import features.clients.lojinha.usuario.BaseLoginPath;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.*;
 @DisplayName("Gerar token de acesso do usuário")
 public class GerarTokenTest {
 
-    @BeforeAll
+    @BeforeClass
     public static void setUp(){
         BaseConfig.configApis();
     }

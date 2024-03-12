@@ -11,7 +11,6 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import support.data.lojinha.data_factory.ProdutoDataFactory;
 import support.data.lojinha.data_factory.UsuarioDataFactory;
-
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.given;
 
