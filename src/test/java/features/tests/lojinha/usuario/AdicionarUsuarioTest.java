@@ -14,6 +14,7 @@ import support.data.lojinha.data_factory.UsuarioDataFactory;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+@DisplayName("Adicionar perfil de usuário")
 public class AdicionarUsuarioTest {
     Faker faker = new Faker();
     private static final String NOME_USUARIO = "Jhon";
