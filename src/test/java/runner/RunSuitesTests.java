@@ -1,6 +1,7 @@
 package runner;
 
 import features.tests.lojinha.produto.*;
+import features.tests.lojinha.usuario.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -10,7 +11,9 @@ import org.junit.runners.Suite;
         AlterarProdutoTest.class,
         BuscarProdutoIdTest.class,
         BuscarProdutoTest.class,
-        RemoverProdutoTest.class
+        RemoverProdutoTest.class,
+        AdicionarUsuarioTest.class,
+        GerarTokenTest.class
 })
 public class RunSuitesTests {
 }

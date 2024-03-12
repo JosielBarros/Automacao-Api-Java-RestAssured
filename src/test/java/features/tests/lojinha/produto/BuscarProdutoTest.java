@@ -52,7 +52,7 @@ public class BuscarProdutoTest {
     }
     @Test
     @DisplayName("Validar busca de produto para um usuário")
-    public void validarBuscaDeProdutoParaUmUsuario(){
+    public void testValidarBuscaDeProdutoParaUmUsuario(){
         corProduto = "";
         nomeProduto = "";
         buscarProdutosDeUmUsuario().assertThat()
@@ -63,7 +63,7 @@ public class BuscarProdutoTest {
     }
     @Test
     @DisplayName("Validar busca de produto por nome")
-    public void validarBuscaDeProdutoPorNome() {
+    public void testValidarBuscaDeProdutoPorNome() {
         corProduto = "";
         buscarProdutosDeUmUsuario().assertThat()
             .statusCode(HttpStatus.SC_OK)
@@ -72,7 +72,7 @@ public class BuscarProdutoTest {
     }
     @Test
     @DisplayName("Validar busca de produtos por cor")
-    public void validarBuscaDeProdutoPorCor(){
+    public void testValidarBuscaDeProdutoPorCor(){
         nomeProduto = "";
         buscarProdutosDeUmUsuario().assertThat()
             .statusCode(HttpStatus.SC_OK)
@@ -81,7 +81,7 @@ public class BuscarProdutoTest {
     }
     @Test
     @DisplayName("Validar tentativa de busca por produto não cadastrado")
-    public void validarTentativaDeBuscaPorProdutoNaoCadastrado(){
+    public void testValidarTentativaDeBuscaPorProdutoNaoCadastrado(){
         nomeProduto = "Produto não cadastrado";
         corProduto = "";
         buscarProdutosDeUmUsuario().assertThat()

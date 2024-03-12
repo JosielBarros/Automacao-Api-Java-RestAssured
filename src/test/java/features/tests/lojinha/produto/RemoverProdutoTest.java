@@ -32,13 +32,13 @@ public class RemoverProdutoTest {
     }
     @Test
     @DisplayName("Validar remoção de um produto")
-    public void validarRemocaoDeUmProduto(){
+    public void testValidarRemocaoDeUmProduto(){
         removerProduto(cadastrarProduto()).assertThat()
             .statusCode(HttpStatus.SC_NO_CONTENT);
     }
     @Test
     @DisplayName("Validar que produto não é encontrado ao tentar remover com id invalido")
-    public void validarQueprodutoNaoEEncontradoAoTentarRemoverComIdInvalido(){
+    public void testValidarQueprodutoNaoEEncontradoAoTentarRemoverComIdInvalido(){
         removerProduto(0).assertThat()
                 .statusCode(HttpStatus.SC_NOT_FOUND);
     }

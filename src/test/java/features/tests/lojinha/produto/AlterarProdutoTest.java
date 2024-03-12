@@ -59,7 +59,7 @@ public class AlterarProdutoTest {
     }
     @Test
     @DisplayName("Validar alteração de dados do produto")
-    public void validarAlteracaoDeDadosDoProduto(){
+    public void testValidarAlteracaoDeDadosDoProduto(){
         nomeProduto = "PlayStation 5";
         corProduto = "Branca";
         componenteNome = "Controle";
@@ -74,7 +74,7 @@ public class AlterarProdutoTest {
     }
     @Test
     @DisplayName("Validar que valor do produto não pode ser alterado para menor que 0.00")
-    public void validarQueValorDoProdutoNaoPodeSerAlteradoParaMenorQue0(){
+    public void testValidarQueValorDoProdutoNaoPodeSerAlteradoParaMenorQue0(){
         valorProduto = 0.00;
         alterarProduto().assertThat()
                 .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
@@ -83,7 +83,7 @@ public class AlterarProdutoTest {
     }
     @Test
     @DisplayName("Validar que valor do produto não pode ser alterado para maior que 7000.00")
-    public void validarQueValorDoProdutoNaoPodeSerAlteradoParaMaiorQue7000(){
+    public void testValidarQueValorDoProdutoNaoPodeSerAlteradoParaMaiorQue7000(){
         valorProduto = 7000.01;
         alterarProduto().assertThat()
                 .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
@@ -92,7 +92,7 @@ public class AlterarProdutoTest {
     }
     @Test
     @DisplayName("Validar que o valor é obrigatório ao alterar o produto")
-    public void validarQueOValorEObrigatorioAoAlterarOProduto(){
+    public void testValidarQueOValorEObrigatorioAoAlterarOProduto(){
         valorProduto = null;
         alterarProduto().assertThat()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)

@@ -24,7 +24,7 @@ public class AdicionarUsuarioTest {
     }
     @Test
     @DisplayName("Validar cadastro de usuário")
-    public void validarCadastroUsuario(){
+    public void testValidarCadastroUsuario(){
         String usuarioLogin = faker.name().firstName() + "@";
         cadastrarUsuario(usuarioLogin).assertThat()
             .statusCode(HttpStatus.SC_CREATED)
@@ -34,7 +34,7 @@ public class AdicionarUsuarioTest {
     }
     @Test
     @DisplayName("Validar tentativa de cadastro para usuário já cadastrado")
-    public void validarTentativaCadastroUsuarioDuplicado(){
+    public void testValidarTentativaCadastroUsuarioDuplicado(){
         String usuarioLogin = "jhon@gmail";
         cadastrarUsuario(usuarioLogin).assertThat()
             .statusCode(HttpStatus.SC_CONFLICT)

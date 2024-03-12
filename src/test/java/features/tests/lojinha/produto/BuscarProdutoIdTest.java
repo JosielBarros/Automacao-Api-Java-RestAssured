@@ -36,7 +36,7 @@ public class BuscarProdutoIdTest {
     }
     @Test
     @DisplayName("Validar busca de produto por id")
-    public void validarBuscaDeProdutoPorId(){
+    public void testValidarBuscaDeProdutoPorId(){
         cadastrarProduto();
         buscarProdutoPorId().assertThat()
             .statusCode(HttpStatus.SC_OK)
@@ -48,7 +48,7 @@ public class BuscarProdutoIdTest {
     }
     @Test
     @DisplayName("Validar tentativa de busca de produto por id invalido")
-    public void validarTentativaDeBuscaDeProdutoComIdInvalido(){
+    public void testValidarTentativaDeBuscaDeProdutoComIdInvalido(){
         produtoId = 0;
         buscarProdutoPorId().assertThat()
             .statusCode(HttpStatus.SC_NOT_FOUND);

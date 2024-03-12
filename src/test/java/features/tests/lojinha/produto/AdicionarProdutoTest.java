@@ -37,7 +37,7 @@ public class AdicionarProdutoTest {
 
     @Test
     @DisplayName("Validar cadastro de produto")
-    public void validarCadastroProduto(){
+    public void testValidarCadastroProduto(){
         int produtoId = adicionarUmProduto(3000.00).assertThat()
             .statusCode(HttpStatus.SC_CREATED)
             .body("message", equalTo("Produto adicionado com sucesso"))
@@ -50,21 +50,21 @@ public class AdicionarProdutoTest {
     }
     @Test
     @DisplayName("Validar tentativa de cadastro do produto com valor do produto menor que 0.00")
-    public void validarTentativaCadastroProdutoComValorProdutoMenorQue0(){
+    public void testValidarTentativaCadastroProdutoComValorProdutoMenorQue0(){
         adicionarUmProduto(0.00).assertThat()
             .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .body("error", equalTo("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00"));
     }
     @Test
     @DisplayName("Validar tentativa de cadastro do produto com valor do produto maior que 7000.00")
-    public void validarTentativaCadastroProdutoValorProdutoMaiorQue7000(){
+    public void testValidarTentativaCadastroProdutoValorProdutoMaiorQue7000(){
         adicionarUmProduto(7000.01).assertThat()
             .statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY)
             .body("error", equalTo("O valor do produto deve estar entre R$ 0,01 e R$ 7.000,00"));
     }
     @Test
     @DisplayName("Validar que o valor é obrigatório ao cadastrar o produto")
-    public void validarQueOValorEObrigatorioAoCadastrarOProduto(){
+    public void testValidarQueOValorEObrigatorioAoCadastrarOProduto(){
         adicionarUmProduto(null).assertThat()
             .statusCode(HttpStatus.SC_BAD_REQUEST)
             .body("data", empty())

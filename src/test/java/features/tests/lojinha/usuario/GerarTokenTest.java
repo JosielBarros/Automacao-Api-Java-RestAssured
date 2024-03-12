@@ -21,13 +21,13 @@ public class GerarTokenTest {
     }
     @Test
     @DisplayName("Validar tentativa de gerar token com usuario invalido")
-    public void validarTentativaGerarTokenUsuarioInvalido(){
+    public void testValidaTentativaGerarTokenUsuarioInvalido(){
         gerartoken("usuario_invalido", "senha_invalida").assertThat()
             .statusCode(HttpStatus.SC_UNAUTHORIZED);
     }
     @Test
     @DisplayName("Validar geração de token")
-    public void validarGeracaoToken(){
+    public void testValidaGeracaoToken(){
         gerartoken("jhon", "123").assertThat()
             .statusCode(HttpStatus.SC_OK)
             .body("message", equalTo("Sucesso ao realizar o login"));
